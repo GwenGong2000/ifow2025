@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五子棋游戏 - 多模式版</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>五子棋游戏</h1>
+            <div class="game-info">
+                <div class="current-player">
+                    当前玩家: <span id="current-player">黑棋</span>
+                </div>
+                <div class="game-mode">
+                    游戏模式: <span id="game-mode-text">人机对战</span>
+                </div>
+                <div class="timer">
+                    计时: <span id="timer">00:00</span>
+                </div>
+            </div>
+        </header>
+        
+        <main>
+            <section class="game-controls">
+                <div class="control-group">
+                    <h3>游戏模式</h3>
+                    <div class="mode-buttons">
+                        <button id="pvp-mode" class="mode-btn active">双人对战</button>
+                        <button id="pve-mode" class="mode-btn">人机对战</button>
+                        <button id="online-mode" class="mode-btn">在线对战</button>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <h3>AI难度</h3>
+                    <div class="difficulty-buttons">
+                        <button id="easy" class="difficulty-btn active">简单</button>
+                        <button id="medium" class="difficulty-btn">中等</button>
+                        <button id="hard" class="difficulty-btn">困难</button>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <h3>棋盘尺寸</h3>
+                    <div class="board-size-buttons">
+                        <button id="size-15" class="size-btn active">15×15</button>
+                        <button id="size-19" class="size-btn">19×19</button>
+                        <button id="size-custom" class="size-btn">自定义</button>
+                    </div>
+                    <div id="custom-size-input" class="custom-size hidden">
+                        <input type="number" id="custom-width" min="9" max="25" value="15" placeholder="宽度">
+                        <span>×</span>
+                        <input type="number" id="custom-height" min="9" max="25" value="15" placeholder="高度">
+                        <button id="apply-custom-size">应用</button>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <h3>游戏控制</h3>
+                    <div class="game-buttons">
+                        <button id="new-game">新游戏</button>
+                        <button id="undo">悔棋</button>
+                        <button id="save-game">保存棋局</button>
+                        <button id="load-game">加载棋局</button>
+                        <button id="replay">回放</button>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <h3>特殊功能</h3>
+                    <div class="feature-buttons">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="dark-mode"> 暗棋模式
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="show-hints" checked> 显示提示
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="sound" checked> 音效
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="timer-enabled"> 计时
+                        </label>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="game-board-container">
+                <canvas id="game-board"></canvas>
+                <div id="win-message" class="win-message hidden">
+                    <div class="message-content">
+                        <h2 id="winner-text">黑棋获胜！</h2>
+                        <button id="close-message">关闭</button>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="game-stats">
+                <h3>游戏统计</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-label">总步数:</span>
+                        <span id="total-moves">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">黑棋胜场:</span>
+                        <span id="black-wins">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">白棋胜场:</span>
+                        <span id="white-wins">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">平局:</span>
+                        <span id="draws">0</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <div id="game-history" class="game-history hidden">
+        <h3>游戏记录</h3>
+        <div class="history-controls">
+            <button id="prev-move">上一步</button>
+            <button id="next-move">下一步</button>
+            <button id="close-history">关闭</button>
+        </div>
+        <div id="move-list" class="move-list"></div>
+    </div>
+    
+    <script src="utils.js"></script>
+    <script src="ai.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
